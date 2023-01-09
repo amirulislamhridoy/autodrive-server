@@ -8,6 +8,6 @@ const locationSchema = mongoose.Schema({
     email: String,
     website: String
 })
-const location = mongoose.model('location', locationSchema)
+const locationModel = mongoose.model('location', locationSchema)
 
-module.exports = location
+module.exports = locationModel

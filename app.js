@@ -7,12 +7,14 @@ require('./config/db')
 var cors = require('cors')
 var bodyParser = require('body-parser')
 const CarRotuer = require('./api/car.router');
-const LocationRouter = require('./api/location.router')
+const LocationRouter = require('./api/location.router');
+const ServiceRouter = require('./api/service.router');
 
 app.use(cors())
 // app.use(express.json())
 app.use(bodyParser.json())
 
+app.use('/', ServiceRouter)
 app.use('/car', CarRotuer)
 app.use('/location', LocationRouter)
 

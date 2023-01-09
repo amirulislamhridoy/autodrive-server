@@ -1,4 +1,4 @@
-const Car = require('../models/car.model')
+const CarModel = require('../models/car.model')
 const { v4 : uuidv4 } = require('uuid')
 
 const addCar =  async (req, res) => {
@@ -24,7 +24,7 @@ const addCar =  async (req, res) => {
 }
 const getAllCar = async (req, res) => {
     try{
-        const cars = await Car.find({})
+        const cars = await CarModel.find({})
         res.status(200).json(cars)
     }catch(e){
         res.status(500).send(error.message)
