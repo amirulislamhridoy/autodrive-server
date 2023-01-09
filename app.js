@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 // const Car = require('./models/car.model');
 require("dotenv").config();
 require('./config/db')
-var cors = require('cors')
-var bodyParser = require('body-parser')
+const cors = require('cors')
+const bodyParser = require('body-parser')
 const CarRotuer = require('./api/car.router');
 const LocationRouter = require('./api/location.router');
 const ServiceRouter = require('./api/service.router');
+const jwt = require('jsonwebtoken');
 
 app.use(cors())
 // app.use(express.json())
@@ -29,7 +30,11 @@ app.use('/location', LocationRouter)
 //         console.log(e)
 //     }
 // })
-
+app.get('/login', (req, res) => {
+    const email = req.query.email
+    const token = jwt.sign({email}, process.env.SECRET_KEY_HEX_FORMAT)
+    res.status(200).send({token})
+})
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/./views/index.html");
 });
