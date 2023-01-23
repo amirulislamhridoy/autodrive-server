@@ -1,7 +1,8 @@
 const CarModel = require('../models/car.model')
-const { v4 : uuidv4 } = require('uuid')
+const { v4: uuidv4 } = require('uuid')
+const jwt = require('jsonwebtoken');
 
-const addCar =  async (req, res) => {
+const addCar = async (req, res) => {
     try {
         // const data = new CarModel({}, (err, data) => {
         //     if(err){
@@ -18,27 +19,27 @@ const addCar =  async (req, res) => {
         await data.save()
         res.send(data)
         console.log(data)
-    }catch(e){
+    } catch (e) {
         res.send(e)
         console.log(e)
     }
 }
 const getAllCar = async (req, res) => {
-    try{
+    try {
         const cars = await CarModel.find({})
         res.status(200).json(cars)
-    }catch(e){
+    } catch (e) {
         res.status(500).send(error.message)
     }
 }
 const getCar = async (req, res) => {
-    try{
-        const {id} = req.params
+    try {
+        const { id } = req.params
         const car = await CarModel.findById(id)
         res.json(car)
-    }catch(e){
+    } catch (e) {
         res.json(e.message)
     }
 }
 
-module.exports = {addCar, getAllCar, getCar}
+module.exports = { addCar, getAllCar, getCar }
