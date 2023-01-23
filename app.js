@@ -32,7 +32,7 @@ app.use('/location', LocationRouter)
 // })
 app.get('/login', (req, res) => {
     const email = req.query.email
-    const token = jwt.sign({email}, process.env.SECRET_KEY_HEX_FORMAT)
+    const token = jwt.sign({email}, process.env.SECRET_KEY_HEX_FORMAT, { expiresIn: '1d' })
     res.status(200).send({token})
 })
 app.get("/", (req, res) => {
