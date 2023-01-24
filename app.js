@@ -8,6 +8,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const CarRotuer = require('./api/car.router');
 const LocationRouter = require('./api/location.router');
+const bookingRouter = require('./api/booking.router');
 const ServiceRouter = require('./api/service.router');
 const jwt = require('jsonwebtoken');
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json())
 app.use('/', ServiceRouter)
 app.use('/car', CarRotuer)
 app.use('/location', LocationRouter)
+app.use('/booking', bookingRouter)
 
 // app.get('/addCar', (req, res) => {
 //     try {
