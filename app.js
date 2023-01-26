@@ -11,6 +11,7 @@ const LocationRouter = require('./api/location.router');
 const bookingRouter = require('./api/booking.router');
 const ServiceRouter = require('./api/service.router');
 const jwt = require('jsonwebtoken');
+const userModel = require('./models/user.modle')
 
 app.use(cors())
 // app.use(express.json())
@@ -20,6 +21,7 @@ app.use('/', ServiceRouter)
 app.use('/car', CarRotuer)
 app.use('/location', LocationRouter)
 app.use('/booking', bookingRouter)
+app.use('/', bookingRouter)
 
 // app.get('/addCar', (req, res) => {
 //     try {
@@ -32,10 +34,15 @@ app.use('/booking', bookingRouter)
 //         console.log(e)
 //     }
 // })
-app.get('/login', (req, res) => {
+app.get('/login', async (req, res) => {
     const email = req.query.email
-    const token = jwt.sign({email}, process.env.SECRET_KEY_HEX_FORMAT, { expiresIn: '1d' })
-    res.status(200).send({token})
+    const user = await userModel.findOne({ email })
+    const token = await jwt.sign({ email }, process.env.SECRET_KEY_HEX_FORMAT, { expiresIn: '1d' })
+    if(!user){
+        const data = await new userModel({email, role: ''})
+        await data.save()
+    }
+    res.status(200).send({ token })
 })
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/./views/index.html");
