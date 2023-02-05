@@ -12,6 +12,7 @@ const bookingRouter = require('./api/booking.router');
 const ServiceRouter = require('./api/service.router');
 const jwt = require('jsonwebtoken');
 const userModel = require('./models/user.modle')
+const userRouter = require('./api/user.router')
 
 app.use(cors())
 // app.use(express.json())
@@ -21,7 +22,7 @@ app.use('/', ServiceRouter)
 app.use('/car', CarRotuer)
 app.use('/location', LocationRouter)
 app.use('/booking', bookingRouter)
-app.use('/', bookingRouter)
+app.use('/', userRouter)
 
 // app.get('/addCar', (req, res) => {
 //     try {
