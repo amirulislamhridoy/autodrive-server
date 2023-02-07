@@ -4,6 +4,6 @@ const {addBooking, getAllBooking} = require('../contollers/booking.contoler')
 const { verifyJWT } = require('../middware/verify')
 
 router.get('/getAll', verifyJWT, getAllBooking)
-router.post('/add', verifyJWT, addBooking)
+router.post('/add', addBooking)
 
 module.exports = router
