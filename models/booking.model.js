@@ -17,13 +17,9 @@ const bookingSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    toDate: String || null || undefined,
+    toDate: String || undefined,
     number: {
         type: String || Number, 
-        required: true
-    },
-    perDay:{
-        type: String || Number,
         required: true
     }
 })
