@@ -25,11 +25,10 @@ const getAllBooking = async (req, res) => {
 const addBooking = async (req, res) => {
     try{
         const data = req.body
-        console.log(data)
         const doc = await bookingModel.create(data);
         res.status(200).json('Your booking is successfull')
     }catch(e){
-
+        console.log(e.message)
     }
 }
 module.exports = {getAllBooking, addBooking}
