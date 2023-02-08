@@ -21,6 +21,14 @@ const bookingSchema = mongoose.Schema({
     number: {
         type: String || Number, 
         required: true
+    },
+    carId: {
+        type: String || Number,
+        required: true,
+    },
+    perDay:{
+        type: String || Number,
+        required: true
     }
 })
 
