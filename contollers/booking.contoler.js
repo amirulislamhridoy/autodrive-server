@@ -19,7 +19,7 @@ const getAllBooking = async (req, res) => {
         const bookings = await bookingModel.find()
         res.status(200).send({data: bookings})
     } catch(e){
-        
+        console.log(e)
     }
 }
 const myCarBooking = async (req, res) => {

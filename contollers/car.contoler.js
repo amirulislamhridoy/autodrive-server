@@ -26,8 +26,26 @@ const addCar = async (req, res) => {
 }
 const getAllCar = async (req, res) => {
     try {
-        const cars = await CarModel.find({})
-        res.status(200).json(cars)
+        const { name, limit, page } = req.query
+        let cars;
+        let totalCar;
+        if (!name) {
+            totalCar = await CarModel.find({})
+            cars = await CarModel.find({}).skip(+limit * +page).limit(parseInt(limit))
+        } else {
+            totalCar = await CarModel.find({
+                "$or": [
+                    {name: {$regex: name}}
+                ]
+            })
+            cars = await CarModel.find({
+                "$or": [
+                    {name: {$regex: name}}
+                ]
+            }).skip(+limit * +page).limit(parseInt(limit))
+        }
+        const pages = Math.ceil(totalCar.length / limit)
+        res.status(200).send({cars, pages, limit})
     } catch (e) {
         res.status(500).send(error.message)
     }
