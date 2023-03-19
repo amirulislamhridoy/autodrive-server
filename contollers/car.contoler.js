@@ -32,7 +32,7 @@ const getAllCar = async (req, res) => {
         if (!name) {
             totalCar = await CarModel.find({})
             cars = await CarModel.find({}).skip(+limit * +page).limit(parseInt(limit))
-        } else {
+        }else {
             totalCar = await CarModel.find({
                 "$or": [
                     {name: {$regex: name}}
@@ -45,7 +45,7 @@ const getAllCar = async (req, res) => {
             }).skip(+limit * +page).limit(parseInt(limit))
         }
         const pages = Math.ceil(totalCar.length / limit)
-        res.status(200).send({cars, pages, limit})
+        res.status(200).send({cars, pages})
     } catch (e) {
         res.status(500).send(error.message)
     }
